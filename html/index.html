@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <link rel="stylesheet" href="/spider/static/book.css">
+    <script typet="text/javascript" src="/spider/static/jquery-1.11.1.min.js"></script>
+    <script src="/spider/static/book.js" charset="utf-8"></script>
+    <title>Document</title>
+</head>
+<body class="day-model">
+    <ul class="head-box">
+        <li><p class="close-btn" onclick="hide(this);"></p></li>
+        <li>
+            <select class="ip-select" id="bookId">
+                <option value="10958694">都市鬼谷医仙</option>
+                <option value="10976484">最强神医混都市</option>
+                <option value="11488436">妙手回春</option>
+                <option value="11843456">上门医仙</option>
+                <option value="51107">我只想安静的做个苟道中人</option>
+                <option value="48557">顶级气运，悄悄修炼千年</option>
+            </select>
+        </li>
+        <li><input type="number" id="page"/></li>
+        <li><input type="button" id="go" value="GO"/></li>
+        <li><input type="button" id="update" value="Update"/></li>
+        <li><input type="button" id="model" value="Day" onclick="switchModel(true);"/></li>
+    </ul>
+    <div class="content handle-box"></div>
+    <div class="big-box">
+        <div class="content" id="readBox"></div>
+        <div class="bottom-gide">
+            <div class="bookInfo">
+                <p class="p-text book-name"></p>
+                <p class="p-text book-title"></p>
+            </div>
+            <div class="pageInfo">
+                <span class="next-icon" data="null"></span>
+                <span class="prev-icon" data="null"></span>
+            </div>
+        </div>
+        <!-- <ul class="bottom-gide">
+            <li class="page-btn up" data-val="">Prev</li>
+            <li class="num-btn">Page</li>
+            <li class="page-btn down" data-val="">Next</li>
+            <div style="clear: both;"></div>
+        </ul> -->
+    </div>
+    <!-- <ul class="setting-box">
+        <li class="tag-btn left" data-val="left"></li>
+        <li class="btn-list">
+            <span class="set-btn" data-key="preview">Preview</span>
+            <span class="set-btn" data-key="reload">Reload</span>
+        </li>
+        <li class="list-item">
+            <span class="item-title">Size</span>
+            <select class="item-value" name="size"></select>
+        </li>
+        <li class="list-item">
+            <span class="item-title">Family</span>
+            <select name="family" class="item-value"></select>
+        </li>
+        <li class="list-item">
+            <span class="item-title">Color</span>
+            <select name="color" class="item-value"></select>
+        </li>
+        <li class="list-item">
+            <span class="item-title">BGC</span>
+            <select name="bgcolor" class="item-value"></select>
+        </li>
+        <li class="list-item">
+            <span class="item-title">LineHeight</span>
+            <select name="lineheight" class="item-value"></select>
+        </li>
+        <li class="list-item">
+            <span class="item-title">LetterSpace</span>
+            <select name="letterspace" class="item-value"></select>
+        </li>
+    </ul> -->
+</body>
+<!-- <script src="/static/setting.js" charset="utf-8"></script> -->
+<script type="text/javascript">
+    $(function(){
+        switchModel();
+        let page = getCookie('LAST_BOOK_PAGE_'+getCookie('READ_BOOK_ID'));
+        $('#bookId').val(getCookie('READ_BOOK_ID'));
+        if(page != null){
+            $('.head-box').hide();
+            getContent(parseInt(page), 'now');
+        }
+        $('#readBox').height(content_H).click(function(){ $('.head-box').hide(); });
+        $('#go').click(function(){ $('.head-box').hide(); clearContent(); getContent(parseInt($('#page').val()), 'now'); });
+        $('#update').click(function(){ updateBook($('#bookId').val()) });
+        $('.bottom-gide').click(function(e){ $('.head-box').show(); e.preventDefault();});
+        $('#bookId').change(function(){
+            $('#page').val(getCookie('LAST_BOOK_PAGE_'+$(this).val()));
+            console.log($(this).val());
+        });
+        let sX = sY = -1;
+        $('#readBox').on('touchstart', function(e){
+            sX = e.originalEvent.changedTouches[0].pageX,
+            sY = e.originalEvent.changedTouches[0].pageY;
+            return false;
+        }).on('touchend', function(e){
+            let touch = e.originalEvent.changedTouches[0];
+            if(touch.pageX - sX > 10){
+                previousPage();
+            }else if(touch.pageX - sX < -10){
+                nextPage();
+            }
+            sX = sY = -1;
+            return false;
+        });
+        $('body').keyup(function(e){
+            if(e.keyCode == 37 || e.keyCode == 38){
+                previousPage();
+            }else if(e.keyCode == 39 || e.keyCode == 40){
+                nextPage();
+            }
+        });
+    });
+</script>
+</html>

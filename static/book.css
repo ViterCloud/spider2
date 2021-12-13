@@ -1,0 +1,26 @@
+@charset "UTF-8";
+*{list-style: none;-webkit-box-sizing: border-box;box-sizing: border-box;padding: 0;border: 0;margin: 0;}
+body{font-size: 18px;font-family: "方正启体简体", "Microsoft YaHei", "微软雅黑", "宋体"; padding: 0;}
+.head-box {position: fixed;width: 80%;font-size: 17px;top: 25%;left: 10%;background: #68d2ed;padding: .7em;border-radius: 10px 10px;}
+.head-box li {width: 100%;display: block;line-height: .7;margin-bottom: 5px;}
+input#page {width: 100%;border-radius: .3em;background: #d8d8d8;text-align: center;color: #ffffea;}
+input#go, input#model, input#update {width: 100%;margin-top: 6px;background: #ffe66d;color: #ffffea;padding: 4px 0;border-radius: 5px;font-weight: 900;}
+.big-box {padding: 5px 15px;width: 100%;}
+.big-box ul {width: 100%;margin-top: 10px;}
+.big-box ul li {display: inline-block;width: 30%;text-align: center;float: left;padding: 5px 0;background: #ff5e5b;font-size: 15px;color: #fff;margin: 0 1.6%;border-radius: 6px;}
+.content {font-size: 21px;word-break: break-all; text-indent: 1em; letter-spacing: 1px;}
+.content .content-title { padding-top: 15px; font-size: 1.2em; text-align: center; font-weight: 700;}
+.content p { margin-bottom: 15px; padding: 0; border: 0;}
+.ip-select { width: 100%; background: #ffffea; margin-bottom: 5px; padding: 0 5px; border-radius: 5px; background: #d8d8d8;text-align: center;color: #ffffea;}
+.night-model { color: #ccc; background: #333;}
+.handle-box { padding: 5px 15px;width: 100%; position: absolute; top: -10px; left: 1px; height: 1px; overflow: hidden;}
+.bottom-gide {position: fixed;left: 0;bottom: 10px;padding: 0 10px;width: 100%;font-size: 0.5em;color: #aaa;}
+.head-box select, .head-box input {height: 30px;font-weight: 900;}
+.close-btn {display: inline;float: right;width: 20px;height: 20px;margin-bottom: 5px;background: url(./close.png);background-size: cover;}
+.bottom-gide .p-text {min-height: 1.334em;}
+.pageInfo {width: 20%;float: right;vertical-align: bottom;margin-top: 0.5em;}
+.pageInfo span {width: 1.5em;background-size: cover;display: inline-block;height: 1.5em;float: right;}
+.bookInfo {display: inline-block;width: 50%;}
+.next-icon[data="null"], .prev-icon[data="null"] {background-image: url(./icon-null.png);}
+.next-icon[data="has"], .prev-icon[data="has"] {background-image: url(./icon-has.png);}
+.next-icon{margin-left: 0.5em;-moz-transform:rotate(180deg);-webkit-transform:rotate(180deg);transform:rotate(180deg);filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);}
