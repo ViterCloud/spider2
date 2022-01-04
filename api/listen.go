@@ -51,12 +51,15 @@ func handlePost(response http.ResponseWriter, request *http.Request) {
 		fmt.Println("Parse Form error")
 	}
 	action := request.Form.Get("action")
+	var msg = ""
 	if action != "" {
 		switch action {
 		case "update":
-			controller.Update(request.Form.Get("bookId"))
+			msg = controller.Update(request.Form.Get("bookId"))
 		case "read":
-			msg := controller.Read(request.Form.Get("pageId"))
+			msg = controller.Read(request.Form.Get("pageId"))
+		}
+		if msg != "" {
 			response.Header().Set("content-type", "text/json")
 			response.Write([]byte(msg))
 		}

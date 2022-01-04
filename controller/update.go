@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"encoding/json"
 	"log"
 	"spider2/config"
 	"spider2/model"
@@ -11,10 +12,17 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
+//UpdateResult for json back
+type UpdateResult struct {
+	Code int `json:"code"`
+	Num  int `json:"num"`
+}
+
 //Update for update book
 func Update(bookID string) string {
 	log.Println("Start Update Book: " + bookID)
 	var latest = 0
+	var num = 0
 	exits, l := checkExits(bookID + config.PageLatestTag)
 	if exits {
 		latest, _ = strconv.Atoi(l)
@@ -31,12 +39,17 @@ func Update(bookID string) string {
 				if !result {
 					log.Println("Update Page " + title)
 					downloadPage(bookID, pageID, title)
+					num++
 				}
 			}
 		})
 	})
 	log.Println("Update Book Finish")
-	return ""
+	msg, _ := json.Marshal(UpdateResult{
+		1,
+		num,
+	})
+	return string(msg)
 }
 
 func downloadPage(bookID string, pageID string, title string) {

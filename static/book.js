@@ -156,7 +156,17 @@ function updateBook(bookId) {
             bookId: bookId
         },
         dataType: 'json',
-        success: function() {}
+        beforeSend: function() {
+            if (ajax_status) {
+                ajax_status = false;
+            } else {
+                return false;
+            }
+        },
+        success: function(data) {
+            ajax_status = true;
+            data.code == 1 && alert('Update Success. New ' + data.num + ' page');
+        }
     })
 }
 
